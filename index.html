@@ -1,465 +1,233 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Service DZ</title>
-<style>
-:root{
-    --primary: #1e88e5; /* لون أزرق أكثر احترافية */
-    --secondary: #ffb300; /* لون أصفر/برتقالي يجذب الانتباه */
-    --dark: #2c3e50;
-    --light: #f5f7fa;
-    --accent: #f1c40f;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service DZ - Khabir Tech</title>
+    <style>
+        :root {
+            --primary: #1e88e5;
+            --secondary: #ffb300;
+            --dark: #2c3e50;
+            --light: #f5f7fa;
+            --accent: #f1c40f;
+        }
 
-*{ margin:0; padding:0; box-sizing:border-box; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Segoe UI', Tahoma, sans-serif; background:#edf1f5; }
 
-body{
-    font-family:'Segoe UI',Tahoma,sans-serif;
-    background:#edf1f5;
-}
+        .app {
+            width:100%;
+            max-width:500px;
+            margin:auto;
+            background:white;
+            min-height:100vh;
+            padding-bottom:90px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
 
-.app{
-    width:100%;
-    max-width:500px;
-    margin:auto;
-    background:white;
-    min-height:100vh;
-    padding-bottom:90px;
-    position: relative;
-}
+        /* Header */
+        .topbar {
+            height:65px;
+            background:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            box-shadow:0 2px 10px rgba(0,0,0,0.08);
+            position:sticky;
+            top:0;
+            z-index:100;
+        }
 
-/* HEADER */
-.topbar{
-    height:60px;
-    background:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-    position:sticky;
-    top:0;
-    z-index:100;
-}
+        .logo { color:var(--primary); font-size:24px; font-weight:bold; }
 
-.logo{
-    color:var(--primary);
-    font-size:24px;
-    font-weight:bold;
-}
+        /* Hero */
+        .hero {
+            position:relative;
+            height:280px;
+            background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200');
+            background-size:cover;
+            background-position:center;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
 
-/* HERO */
-.hero{
-    position:relative;
-    height:280px;
-    background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200');
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
+        .overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); }
 
-.overlay{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.65); /* تعتيم أكثر لإبراز النص */
-}
+        .hero-content { position:relative; z-index:2; text-align:center; color:white; width:90%; }
+        .hero-content h1 { font-size:28px; margin-bottom:10px; }
 
-.hero-content{
-    position:relative;
-    z-index:2;
-    text-align:center;
-    color:white;
-    width:90%;
-}
+        /* Forms & Pages */
+        .page { padding:20px; }
+        .page h2 { text-align:center; margin-bottom:20px; color:var(--dark); }
 
-.hero-content h1{ font-size:28px; margin-bottom:10px; }
-.hero-content p{ margin-bottom:20px; font-size:14px;}
+        input, select {
+            width:100%;
+            padding:14px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            margin-bottom:15px;
+            font-size:15px;
+            background: #fafafa;
+            outline: none;
+        }
 
-.search-box{
-    background:white;
-    border-radius:50px;
-    overflow:hidden;
-    display:flex;
-    padding: 5px;
-}
+        input:focus { border-color: var(--primary); }
 
-.search-box select{
-    flex:1;
-    border:none;
-    padding:10px;
-    outline:none;
-    margin-bottom: 0;
-    background: transparent;
-}
+        /* Buttons */
+        .btn {
+            width:90%;
+            margin:15px auto;
+            display:block;
+            border:none;
+            border-radius:12px;
+            padding:16px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition: 0.3s;
+        }
 
-.search-box button{
-    border:none;
-    background:var(--primary);
-    color:white;
-    padding:0 20px;
-    border-radius: 50px;
-    cursor:pointer;
-    font-weight:bold;
-}
+        .btn:active { transform: scale(0.97); }
+        .btn-client { background:var(--primary); color:white; }
+        .btn-pro { background:var(--secondary); color:var(--dark); }
 
-/* BUTTONS */
-.btn{
-    width:90%;
-    margin:15px auto;
-    display:block;
-    border:none;
-    border-radius:10px;
-    padding:15px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition: 0.2s;
-}
+        /* Navigation */
+        .bottom-nav {
+            position:fixed;
+            bottom:0;
+            width:100%;
+            max-width:500px;
+            height:70px;
+            background:white;
+            display:flex;
+            justify-content:space-around;
+            align-items:center;
+            box-shadow:0 -5px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
 
-.btn:active { transform: scale(0.98); }
+        .nav-btn { border:none; background:none; font-size:26px; cursor:pointer; color: #888; }
+        .nav-btn.active { color: var(--primary); }
 
-.btn-client{ background:var(--primary); color:white; }
-.btn-pro{ background:var(--secondary); color:var(--dark); }
-
-/* FORMS */
-.page{ padding:20px; }
-.page h2{ text-align:center; margin-bottom:20px; color:var(--dark); }
-
-input, select{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    border:1px solid #ddd;
-    margin-bottom:15px;
-    font-size:15px;
-    background: #fafafa;
-}
-
-/* RESULTS */
-.result-card{
-    background:white;
-    border-radius:12px;
-    padding:15px;
-    margin-bottom:15px;
-    display:flex;
-    gap:15px;
-    align-items:center;
-    border: 1px solid #eee;
-    box-shadow:0 4px 6px rgba(0,0,0,0.04);
-}
-
-.result-card img{
-    width:80px;
-    height:80px;
-    border-radius:10px;
-    object-fit:cover;
-}
-
-.result-info{ flex:1; }
-.result-info h3{ color:var(--dark); margin-bottom:5px; font-size:18px;}
-.result-info p{ color:#666; margin-bottom:5px; font-size:14px;}
-.rating{ color:var(--accent); margin:8px 0; font-size:12px;}
-
-.actions{
-    display:flex;
-    gap:10px;
-    margin-top:10px;
-}
-
-.actions a { flex: 1; text-decoration: none; }
-
-.call-btn, .whatsapp-btn{
-    width: 100%;
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight: bold;
-}
-.call-btn{ background:var(--primary); }
-.whatsapp-btn{ background:#25D366; }
-
-/* BOTTOM NAV */
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    max-width:500px;
-    height:65px;
-    background:white;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    box-shadow:0 -2px 10px rgba(0,0,0,0.05);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-}
-
-.bottom-nav button{
-    border:none;
-    background:none;
-    font-size:24px;
-    cursor:pointer;
-    padding: 10px;
-    border-radius: 50%;
-}
-
-.hidden{ display:none !important; }
-.back{ text-align:center; color:#888; margin-top:15px; cursor:pointer; font-weight:bold;}
-
-</style>
+        .hidden { display:none !important; }
+        .back-link { text-align:center; color:#888; margin-top:15px; cursor:pointer; font-weight:bold; display:block;}
+    </style>
 </head>
-
 <body>
 
 <div class="app">
-
-    <!-- الصفحة الرئيسية -->
-    <div id="home-page" class="page-container">
-        <div class="topbar">
-            <div class="logo">Service DZ</div>
-        </div>
-
+    <!-- 1. الصفحة الرئيسية -->
+    <div id="home-page">
+        <div class="topbar"><div class="logo">Service DZ</div></div>
         <div class="hero">
             <div class="overlay"></div>
             <div class="hero-content">
-                <h1>اعثر على أفضل حرفي</h1>
-                <p>مئات المحترفين المعتمدين بالقرب منك</p>
-                <div class="search-box">
-                    <select id="hero-search-craft">
-                        <option value="">اختر الخدمة...</option>
-                        <option value="كهربائي">كهربائي</option>
-                        <option value="سباك">سباك</option>
-                        <option value="نجار">نجار</option>
-                        <option value="دهان">دهان</option>
-                        <option value="بناء">بناء</option>
-                    </select>
-                    <button onclick="goToSearchFromHero()">بحث</button>
-                </div>
+                <h1>اعثر على محترفين</h1>
+                <p>الخدمة الأفضل في الجزائر لباب منزلك</p>
             </div>
         </div>
-
-        <button class="btn btn-client" onclick="showPage('search-page')">تصفح جميع الحرفيين</button>
-        <button class="btn btn-pro" onclick="showPage('pro-page')">سجل كحرفي جديد</button>
+        <button class="btn btn-client" onclick="showPage('client-page')">أنا أبحث عن حرفي</button>
+        <button class="btn btn-pro" onclick="showPage('pro-page')">أنا حرفي (سجل مهنتك)</button>
     </div>
 
-    <!-- تسجيل الحرفي -->
-    <div id="pro-page" class="hidden page-container page">
-        <h2>تسجيل حساب حرفي</h2>
-        
-        <input type="text" id="p-brand" placeholder="الاسم الشخصي أو اسم الورشة">
-        <input type="tel" id="p-phone" placeholder="رقم الهاتف (مثال: 0555123456)">
-        
-        <label style="font-size:14px; color:#666; margin-bottom:5px; display:block;">صورة شخصية أو صورة لعملك:</label>
-        <input type="file" id="p-image" accept="image/*">
+    <!-- 2. صفحة تسجيل الزبون (الجديدة) -->
+    <div id="client-page" class="hidden page">
+        <h2>إنشاء حساب زبون</h2>
+        <input type="text" id="c-name" placeholder="الإسم الكامل">
+        <input type="tel" id="c-phone" placeholder="رقم الهاتف">
+        <select id="c-wilaya">
+            <option value="">اختر الولاية</option>
+        </select>
+        <button class="btn btn-client" onclick="saveClient()">دخول ومتابعة</button>
+        <span class="back-link" onclick="showPage('home-page')">العودة للرئيسية</span>
+    </div>
 
+    <!-- 3. صفحة تسجيل الحرفي -->
+    <div id="pro-page" class="hidden page">
+        <h2>تسجيل حرفي مهني</h2>
+        <input type="text" id="p-brand" placeholder="اسمك التجاري أو الشخصي">
+        <input type="tel" id="p-phone" placeholder="رقم الهاتف (واتساب)">
         <select id="p-craft">
-            <option value="كهربائي">كهربائي - Electricien</option>
-            <option value="سباك">سباك - Plombier</option>
-            <option value="نجار">نجار - Menuisier</option>
-            <option value="دهان">دهان - Peintre</option>
-            <option value="بناء">بناء - Maçon</option>
+            <option>كهربائي - Electricien</option>
+            <option>سباك - Plombier</option>
+            <option>نجار - Menuisier</option>
+            <option>مصلح مبردات - Frigoriste</option>
+            <option>دهان - Peintre</option>
         </select>
-
-        <select id="p-com">
-            <option value="الجزائر">الجزائر العاصمة</option>
-            <option value="وهران">وهران</option>
-            <option value="قسنطينة">قسنطينة</option>
-            <option value="سطيف">سطيف</option>
+        <select id="p-wilaya">
+            <option value="">اختر الولاية</option>
         </select>
-
         <button class="btn btn-pro" onclick="savePro()">تأكيد التسجيل</button>
-        <div class="back" onclick="showPage('home-page')">العودة للرئيسية</div>
+        <span class="back-link" onclick="showPage('home-page')">إلغاء</span>
     </div>
 
-    <!-- صفحة البحث والنتائج -->
-    <div id="search-page" class="hidden page-container page">
-        <h2>البحث عن حرفي</h2>
-
-        <select id="search-craft">
-            <option value="">جميع المهن</option>
-            <option value="كهربائي">كهربائي</option>
-            <option value="سباك">سباك</option>
-            <option value="نجار">نجار</option>
-            <option value="دهان">دهان</option>
-            <option value="بناء">بناء</option>
+    <!-- 4. صفحة البحث -->
+    <div id="search-page" class="hidden page">
+        <h2>البحث عن خدمات</h2>
+        <select id="search-wilaya">
+            <option value="">كل الولايات</option>
         </select>
-
-        <select id="search-com">
-            <option value="">جميع الولايات</option>
-            <option value="الجزائر">الجزائر العاصمة</option>
-            <option value="وهران">وهران</option>
-            <option value="قسنطينة">قسنطينة</option>
-            <option value="سطيف">سطيف</option>
-        </select>
-
-        <button class="btn btn-client" onclick="searchPros()">إظهار النتائج</button>
-
-        <div id="results" style="margin-top: 20px;"></div>
-
-        <div class="back" onclick="showPage('home-page')">العودة للرئيسية</div>
+        <div id="results-list"></div>
     </div>
-
 </div>
 
-<!-- شريط التنقل السفلي -->
+<!-- Bottom Navigation -->
 <div class="bottom-nav">
-    <button onclick="showPage('home-page')">🏠</button>
-    <button onclick="showPage('search-page')">🔍</button>
-    <button onclick="showPage('pro-page')">➕</button>
+    <button class="nav-btn active" onclick="showPage('home-page')">🏠</button>
+    <button class="nav-btn" onclick="showPage('search-page')">🔍</button>
+    <button class="nav-btn" onclick="showPage('pro-page')">👤</button>
 </div>
 
 <script>
-// التنقل بين الصفحات
-function showPage(id){
-    document.querySelectorAll('.page-container').forEach(page => {
-        page.classList.add('hidden');
-    });
-    document.getElementById(id).classList.remove('hidden');
-    
-    // إذا فتحنا صفحة البحث، نظهر جميع الحرفيين كبداية
-    if(id === 'search-page'){
-        searchPros();
-    }
-}
+    // بيانات الولايات (58 ولاية)
+    const wilayas = [
+        "01-أدرار", "02-الشلف", "06-بجاية", "13-تلمسان", "16-الجزائر", "18-جيجل", "19-سطيف", "31-وهران"
+        // يمكنك إضافة البقية هنا بنفس التنسيق
+    ];
 
-// الانتقال من البحث في الصفحة الرئيسية
-function goToSearchFromHero() {
-    const selectedCraft = document.getElementById('hero-search-craft').value;
-    document.getElementById('search-craft').value = selectedCraft;
-    showPage('search-page');
-}
-
-// تسجيل حرفي جديد مع معالجة الصورة بشكل صحيح (Base64)
-function savePro(){
-    const brand = document.getElementById('p-brand').value.trim();
-    const phone = document.getElementById('p-phone').value.trim();
-    const craft = document.getElementById('p-craft').value;
-    const com = document.getElementById('p-com').value;
-    const imageInput = document.getElementById('p-image');
-
-    if(brand === '' || phone === ''){
-        alert('يرجى إدخال الاسم ورقم الهاتف');
-        return;
-    }
-
-    if(phone.length < 9){
-        alert('رقم الهاتف يبدو غير صحيح');
-        return;
-    }
-
-    const imageFile = imageInput.files[0];
-    
-    if (imageFile) {
-        // تحويل الصورة إلى نص لحفظها في المتصفح
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            saveDataToStorage(brand, phone, craft, com, e.target.result);
-        };
-        reader.readAsDataURL(imageFile);
-    } else {
-        // صورة افتراضية في حال لم يرفع صورة
-        saveDataToStorage(brand, phone, craft, com, 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png');
-    }
-}
-
-// دالة مساعدة لحفظ البيانات
-function saveDataToStorage(brand, phone, craft, com, imageBase64) {
-    let pros = JSON.parse(localStorage.getItem('pros')) || [];
-    
-    const pro = {
-        id: Date.now(),
-        brand: brand,
-        phone: phone,
-        craft: craft,
-        com: com,
-        image: imageBase64
+    // تشغيل القوائم عند التحميل
+    window.onload = function() {
+        const selectIds = ['c-wilaya', 'p-wilaya', 'search-wilaya'];
+        selectIds.forEach(id => {
+            const el = document.getElementById(id);
+            if(el) {
+                wilayas.forEach(w => {
+                    let opt = document.createElement('option');
+                    opt.value = w; opt.text = w;
+                    el.appendChild(opt);
+                });
+            }
+        });
     };
 
-    pros.push(pro);
-    localStorage.setItem('pros', JSON.stringify(pros));
-    
-    alert('تم تسجيل الحساب بنجاح!');
-    
-    // تفريغ الحقول
-    document.getElementById('p-brand').value = '';
-    document.getElementById('p-phone').value = '';
-    
-    showPage('search-page');
-}
-
-// البحث وعرض النتائج
-function searchPros(){
-    const resultsContainer = document.getElementById('results');
-    const pros = JSON.parse(localStorage.getItem('pros')) || [];
-    
-    const searchCraft = document.getElementById('search-craft').value;
-    const searchCom = document.getElementById('search-com').value;
-
-    let found = pros;
-
-    // التصفية حسب المهنة
-    if(searchCraft !== "") {
-        found = found.filter(p => p.craft === searchCraft);
-    }
-    
-    // التصفية حسب الولاية
-    if(searchCom !== "") {
-        found = found.filter(p => p.com === searchCom);
+    function showPage(id) {
+        document.querySelectorAll('.app > div').forEach(p => p.classList.add('hidden'));
+        document.getElementById(id).classList.remove('hidden');
     }
 
-    resultsContainer.innerHTML = '';
-
-    if(found.length === 0){
-        resultsContainer.innerHTML = `
-        <div style="text-align:center; padding:30px; color:#888;">
-            <div style="font-size:40px; margin-bottom:10px;">😕</div>
-            <p>لم نجد حرفيين بهذه المواصفات حالياً.</p>
-        </div>`;
-        return;
+    function saveClient() {
+        const name = document.getElementById('c-name').value;
+        const phone = document.getElementById('c-phone').value;
+        if(name && phone) {
+            alert("مرحباً بك يا " + name);
+            showPage('search-page');
+        } else {
+            alert("يرجى ملء البيانات");
+        }
     }
 
-    found.forEach(p => {
-        // معالجة رقم الهاتف للواتساب (حذف الصفر الأول إذا وجد)
-        let cleanPhone = p.phone.replace(/^0+/, '');
-
-        resultsContainer.innerHTML += `
-        <div class="result-card">
-            <img src="${p.image}" alt="صورة الحرفي">
-            <div class="result-info">
-                <h3>${p.brand}</h3>
-                <p>🛠️ ${p.craft} | 📍 ${p.com}</p>
-                <div class="rating">⭐⭐⭐⭐⭐ (جديد)</div>
-                <div class="actions">
-                    <a href="tel:${p.phone}">
-                        <button class="call-btn">📞 اتصال</button>
-                    </a>
-                    <a href="https://wa.me/213${cleanPhone}" target="_blank">
-                        <button class="whatsapp-btn">💬 واتساب</button>
-                    </a>
-                </div>
-            </div>
-        </div>`;
-    });
-}
-
-// إضافة بعض البيانات الوهمية للتجربة إذا كان السجل فارغاً
-window.onload = function() {
-    let pros = JSON.parse(localStorage.getItem('pros'));
-    if (!pros || pros.length === 0) {
-        let dummyData = [
-            { id: 1, brand: "أحمد للكهرباء", phone: "0555123456", craft: "كهربائي", com: "الجزائر", image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png" },
-            { id: 2, brand: "ورشة الإتقان للنجارة", phone: "0666987654", craft: "نجار", com: "وهران", image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png" }
-        ];
-        localStorage.setItem('pros', JSON.stringify(dummyData));
+    function savePro() {
+        const phone = document.getElementById('p-phone').value;
+        if(phone.length >= 10) {
+            alert("تم تسجيلك بنجاح كحرفي!");
+            showPage('home-page');
+        } else {
+            alert("رقم الهاتف غير صحيح");
+        }
     }
-};
 </script>
 </body>
 </html>
